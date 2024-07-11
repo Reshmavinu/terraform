@@ -27,6 +27,8 @@ variable "security_group"{
 variable "instance_name"{
      description="name of the instance"
      default="demo-terraform"
-ariable "instance_count"{
+}
+variable "instance_count"{
      description="no. of instance to be created"
      default=1
+}
