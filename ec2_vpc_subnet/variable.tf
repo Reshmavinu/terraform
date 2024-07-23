@@ -14,6 +14,7 @@ variable "subnet_cidr" {
 }
 variable "env_prefix" {
   description="environment name"
+  type=string
 }
 
 variable "availability_zone" {
