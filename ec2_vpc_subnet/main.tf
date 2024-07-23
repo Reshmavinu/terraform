@@ -59,6 +59,31 @@ resource "aws_security_group" "firewall" {
     Name = "${var.env_prefix}-security-group"
   }
 }
+  #first method
+  key_name = "TF_key"
+  
+
+  tags = {
+    Name = "Terraform Ec2"
+  }
+}
+
+#keypair second method for Key_pair
+###########public key to be stored in the generated ec2
+resource "aws_key_pair" "TF_key" {
+  key_name   = "TF_key"
+  public_key = tls_private_key.rsa.public_key_openssh
+}
+
+resource "tls_private_key" "rsa" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+#########private key to be stored in the local vm so that we can connect to  generated ec2 using "ssh ubuntu@<ipaddress> -i <private key name here it is tfkey" & chmod 400 tfkey
+resource "local_file" "TF-key" {
+    content  = tls_private_key.rsa.private_key_pem
+    filename = "tfkey"
+}
 resource "aws_instance" "ec2-instance" {
   ami                     = var.ami-id
   instance_type           = var.instance-type
