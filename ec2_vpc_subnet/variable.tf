@@ -21,3 +21,11 @@ variable "availability_zone" {
  description="availability zone for subnet"
  type=string
 }
+variable "ami-id" {
+  description="ami-id of launcing ec2"
+  type=string
+}
+variable "instance-type" {
+  description="instance type of ec2"
+  type=string
+}
