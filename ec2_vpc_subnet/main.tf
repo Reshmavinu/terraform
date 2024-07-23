@@ -8,12 +8,12 @@ resource "aws_subnet" "subnet_id" {
     Name = "Main"
   }
 }
-###internet gateway should be created before route table###
+\* ###internet gateway should be created before route table### */
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.VPC_resource.id
 
   tags = {
-    Name = "main-gw"
+    Name = "${var.env_prefix}-internetgateway"
   }
 }
 resource "aws_route_table" "route_table" {
@@ -24,6 +24,6 @@ resource "aws_route_table" "route_table" {
     gateway_id = aws_internet_gateway.gw.id
   }
   tags = {
-    Name = "RTB"
+    Name = "${var.env_prefix}-routetable"
   }
 }
