@@ -89,4 +89,5 @@ resource "aws_instance" "ec2-instance" {
   instance_type           = var.instance-type
   subnet_id               = aws_subnet.subnet_id.id
   security_group          = aws_security_group.firewall.id
+  user_data               =file("script.sh")
   }
