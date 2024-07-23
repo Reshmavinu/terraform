@@ -12,6 +12,9 @@ variable "subnet_cidr" {
  description="the cidr block for subnet"
  type=string
 }
+variable "env_prefix" {
+  description="environment name"
+}
 
 variable "availability_zone" {
  description="availability zone for subnet"
