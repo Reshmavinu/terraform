@@ -27,3 +27,35 @@ resource "aws_route_table" "route_table" {
     Name = "${var.env_prefix}-routetable"
   }
 }
+#############security group###############
+resource "aws_security_group" "firewall" {
+  name        = "${var.env_prefix}-sg"
+  description = "Allow traffic"
+  vpc_id      = aws_vpc.VPC_resource.id
+
+  ingress {
+    description = "ssh"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    description = "application nginx port"
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"   ########### allowing all protocol
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "${var.env_prefix}-security-group"
+  }
+}
