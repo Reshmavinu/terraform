@@ -8,6 +8,7 @@ resource "aws_subnet" "subnet_id" {
     Name = "Main"
   }
 }
+###internet gateway should be created before route table###
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.VPC_resource.id
 
